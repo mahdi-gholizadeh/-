@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1></h1>
+
+<div class="container">
+    <div class="row">
+        {% for product in products_list %}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+
+
+                        <div class="d-flex">
+                            <a href="/products-fb/{{ product.id }}/" class="btn btn-primary me-2">نمایش جزئیات</a>
+                            <a href="/products-fb/{{ product.id }}/" class="btn btn-danger">افزودن به سبد خرید</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

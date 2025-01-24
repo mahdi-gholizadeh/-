@@ -1,0 +1,43 @@
+
+
+.product-card img {
+  width: 100%; /* عرض تصویر به 100% کارت تنظیم می‌شود */
+  height: 200px; /* ارتفاع ثابت 200px برای تصویر */
+  object-fit: cover; /* تصویر به‌طور کامل فضای کارت را پر می‌کند */
+  border-radius: 10px; /* گوشه‌های تصویر گرد می‌شود */
+}
+
+
+
+.price-box {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b); /* گرادیان زیبا */
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.price-box .price-label {
+    margin-right: 10px;
+    font-size: 1em;
+    color: #fff;
+    font-weight: normal;
+}
+
+.price-box .price {
+    font-size: 1.5em;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.2); /* پس‌زمینه نیمه‌شفاف */
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+}

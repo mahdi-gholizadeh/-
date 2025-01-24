@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center align-items-center">
+        <!-- تصویر محصول -->
+        <div class="col-md-6 text-center">
+            <img src="{{ product.image.url }}" class="img-fluid rounded shadow" alt="{{ product.title }}">
+        </div>
+
+        <!-- توضیحات محصول -->
+        <div class="col-md-6">
+            <div class="card border-0">
+                <div class="card-body">
+                    <h3 class="card-title">{{ product.title }}</h3>
+                    <p class="card-text">{{ product.description }}</p>
+
+                    <!-- قیمت -->
+                    <div class="price-box mb-4">
+                        <span class="price-label">قیمت:</span>
+                        <span class="price">{{ product.price }} تومان</span>
+                    </div>
+
+                    <!-- فرم افزودن به سبد خرید -->
+                    <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <div class="d-flex align-items-center mb-3">
+                            <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm mx-1" onclick="increase()">+</a>
+                            <input type="number" id="count-input" name="count" value="1" min="1" class="form-control text-center mx-2" style="width: 60px;">
+                            <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm mx-1" onclick="decrease()">-</a>
+                        </div>
+                        <button type="submit" id="button-cart" class="btn btn-primary btn-lg w-100">
+                            افزودن به سبد خرید
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function increase() {
+        let countField = document.getElementById('count-input');
+        countField.value = parseInt(countField.value) + 1;
+    }
+
+    function decrease() {
+        let countField = document.getElementById('count-input');
+        if (parseInt(countField.value) > 1) {
+            countField.value = parseInt(countField.value) - 1;
+        }
+    }
+</script>
+{% endblock %}

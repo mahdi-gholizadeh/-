@@ -1,0 +1,124 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'static_admin/admin/css/style.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        /* Navbar background gradient */
+        .navbar {
+            background: linear-gradient(90deg, #32CD32, #006400); /* Green gradient */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo style */
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff !important; /* White text */
+            transition: color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: #FFD700 !important; /* Gold on hover */
+        }
+
+        /* Navbar link styles */
+        .nav-link {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #fff !important; /* White text */
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #FFD700 !important; /* Gold on hover */
+            text-decoration: underline;
+        }
+
+        /* Search button styles */
+        .btn-outline-success {
+            color: #fff;
+            border-color: #fff;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-success:hover {
+            background-color: #fff;
+            color: #006400; /* Dark green text */
+        }
+
+        /* Active link style */
+        .nav-item.active .nav-link {
+            color: #FFD700 !important; /* Gold for active link */
+        }
+
+        /* Navbar toggle button for mobile */
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5); /* White border */
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+    </style>
+    <title>gil - shop</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="#">gilshop</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          {% if request.user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">خانه</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about_us">درباره ما</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact_us">ارتباط با ما</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/products-fb">محصولات</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">خروج</a>
+            </li>
+          {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">خانه</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about_us">درباره ما</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact_us">ارتباط با ما</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/products-fb">محصولات</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">ورود</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">ثبت نام</a>
+            </li>
+          {% endif %}
+        </ul>
+        
+      </div>
+    </nav>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <form action="" method="POST" >
+                    {% csrf_token %}
+                <div class="col-md-6">
+                    {{ contact_form }}
+                    <button class="btn btn-danger">ارسال</button>
+                </div>
+      <!--              <div class="col-md-6 mx-auto">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" name="Fullname" class="form-control" placeholder="نام و نام خانوادگی خود را وارد کنید">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="Email" class="form-control" placeholder="ایمیل خود را وارد کنید">
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="متن پیام خود را بنویسید"></textarea>
+                            <br>
+                            <button class="btn btn-danger">ارسال</button>
+                            
+                            
+                        </div>  -->
+                    </form>
+                </div>
+            </>
+        </div>
+    </div>
+    <p>{{ about_message }}</p>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
