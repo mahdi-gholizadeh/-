@@ -6,17 +6,24 @@ from django.shortcuts import Http404,HttpResponse
 from django.contrib.auth import authenticate,login,logout,get_user_model
 from django.contrib.auth.models import User
 from .forms import ContactForm,Loginform,Registerform
+from products.models import Product
+
 def home(request):
-    context={
-        'message':"welcome to my site"
+
+    products = Product.objects.all()
+    context = {
+        'products': products,
 
     }
-    return render(request,'home.html',context)
+    return render(request, 'home.html', context)
+
+
+
 
 
 def about_us(request):
     context={
-        'about_message':"made by mahdi"
+        'about_message':"made by mahdi-shakiba-saba"
 
     }
 
@@ -90,3 +97,5 @@ def register_page(request):
 def log_out(request):
     logout(request)
     return redirect('/')
+
+

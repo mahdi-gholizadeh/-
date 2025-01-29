@@ -2,44 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم تماس با ما</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5); 
+            color: #2c3e50;
+            font-family: 'Arial', sans-serif;
+        }
+        .form-container {
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+            padding: 30px; 
+            max-width: 600px; 
+            margin: auto;
+        }
+        .form-container h1 {
+            font-size: 2rem; 
+            color: #34495e;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-control {
+            border: 2px solid #ddd;
+            border-radius: 10px; 
+            font-size: 1.1rem; 
+            padding: 12px; 
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem; 
+            padding: 12px; 
+            transition: all 0.3s ease;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px; 
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <div class="d-flex justify-content-center align-items-center vh-100">
-        <div class="container">
-            <div class="row justify-content-center">
-                <form action="" method="POST" >
-                    {% csrf_token %}
-                <div class="col-md-6">
-                    {{ contact_form }}
-                    <button class="btn btn-danger">ارسال</button>
+        <div class="form-container">
+            <h1>فرم تماس با ما</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" name="Fullname" class="form-control" placeholder="نام و نام خانوادگی">
                 </div>
-      <!--              <div class="col-md-6 mx-auto">
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <input type="text" name="Fullname" class="form-control" placeholder="نام و نام خانوادگی خود را وارد کنید">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" name="Email" class="form-control" placeholder="ایمیل خود را وارد کنید">
-                        </div>
-                        <div class="mb-3">
-                            <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="متن پیام خود را بنویسید"></textarea>
-                            <br>
-                            <button class="btn btn-danger">ارسال</button>
-                            
-                            
-                        </div>  -->
-                    </form>
+                <div class="mb-3">
+                    <input type="email" name="Email" class="form-control" placeholder="ایمیل">
                 </div>
-            </>
+                <div class="mb-3">
+                    <textarea name="message" id="message" rows="6" class="form-control" placeholder="پیام خود را بنویسید"></textarea>
+                </div>
+                <button class="btn btn-danger w-100">ارسال</button>
+            </form>
         </div>
     </div>
-    <p>{{ about_message }}</p>
+    <footer>
+        <p>{{ about_message }}</p>
+    </footer>
 
-    <!-- Bootstrap JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

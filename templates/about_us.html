@@ -1,10 +1,131 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درباره ما</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #4A90E2;
+        }
+        .header p {
+            font-size: 1rem;
+            color: #777;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .section p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .contact div {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .contact div h3 {
+            font-size: 1.2rem;
+            color: #4A90E2;
+            margin-bottom: 10px;
+        }
+        .social-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #4A90E2;
+            font-size: 1.5rem;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+    </style>
 </head>
 <body>
-<p>{{ about_message }}</p>
+    <div class="container">
+        <div class="header">
+            <h1>درباره ما</h1>
+            <p>به گیل شاپ خوش آمدید؛ دروازه‌ای به سوی محصولات محلی و متنوع گیلان.
+ما مفتخریم که محصولات اصیل و باکیفیت را مستقیماً از دل این منطقه زیبا ارائه می‌دهیم.
+از خوراکی‌های سنتی و صنایع دستی گرفته تا چای‌های ارگانیک و ادویه‌ها، هر محصول داستانی از فرهنگ و میراث پرجنب‌وجوش گیلان را روایت می‌کند.
+در گیل شاپ، متعهد به انتقال حس و حال گیلان به خانه شما هستیم و هر خرید گامی است در حمایت از هنرمندان محلی و حفظ سنت‌های منطقه‌ای.</p>
+        </div>
+
+        
+
+        <div class="section">
+            <h2>راه های ارتباطی</h2>
+            <div class="contact">
+                <div>
+                    <h3>آدرس:</h3>
+                    <p>رشت - خیابان شمشاد - کوچه اقاقیا - ساختمان زرین - واحد 4</p>
+                </div>
+                <div>
+                    <h3>تلفن:</h3>
+                    <p>01333323900</p>
+                </div>
+                <div>
+                    <h3>ایمیل:</h3>
+                    <p>info@example.com</p>
+                </div>
+                <div>
+                    <h3>شبکه های اجتماعی</h3>
+                    <p>ما را دنبال کنید</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <a href="#" target="_blank">Facebook</a>
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">Instagram</a>
+            <a href="#" target="_blank">LinkedIn</a>
+        </div>
+
+        <div class="footer">
+            <p></p>
+        </div>
+    </div>
 </body>
-</html>
+</html> 

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Product
 from django.views.generic.list import ListView
 from sabad.forms import NewsabadForm
-
+from django.shortcuts import render, get_object_or_404
 
 
 
@@ -32,13 +32,14 @@ class ProductsView(ListView):
 
 
 
-def product_detail(request,product_id):
-    product=Product.objects.get(id=product_id)
-    new_sabad_form = NewsabadForm(request.POST or None,initial=({'product_id':product_id}))
-    context={
 
-        'product':product,
-        'new_sabad_form':new_sabad_form
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    new_sabad_form = NewsabadForm(request.POST or None, initial={'product_id': product_id})
+    context = {
+        'product': product,
+        'new_sabad_form': new_sabad_form
     }
 
-    return render(request,'product_detail.html',context)
+    return render(request, 'product_detail.html', context)

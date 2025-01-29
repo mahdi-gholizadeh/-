@@ -19,22 +19,22 @@
     <title>Logo Box</title>
     <style>
       .logo-box {
-        width: 400px; /* افزایش عرض به دو برابر */
-        height: 400px; /* افزایش ارتفاع به دو برابر */
-        background-color: #f8f9fa; /* پس‌زمینه ملایم */
-        border: 2px solid #28a745; /* حاشیه سبز */
-        border-radius: 50%; /* دایره‌ای بودن باکس */
+        width: 400px; 
+        height: 400px; 
+        background-color: #f8f9fa; 
+        border: 2px solid #28a745; 
+        border-radius: 50%; 
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* سایه زیبا */
-        margin: 50px auto; /* مرکز کردن باکس */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        margin: 50px auto; 
       }
 
       .logo-box img {
-        max-width: 90%; /* اندازه حداکثری تصویر درون دایره */
-        max-height: 90%; /* اندازه حداکثری تصویر درون دایره */
-        border-radius: 50%; /* دایره‌ای بودن لوگو */
+        max-width: 90%; 
+        max-height: 90%; 
+        border-radius: 50%; 
       }
     </style>
   </head>
@@ -63,78 +63,68 @@
     
     
     
-    {% load static %}
-
-<div class="container mt-5">
-    <!-- باکس پیشنهاد ویژه -->
-    <div class="special-offer-box text-center py-3 mb-4">
+    
+    
+    
+    
+    
+  <div class="container mt-5">
+    
+    <div class="special-offer-box text-center py-3 mb-4 bg-danger">
         <h2 class="fw-bold text-white">پیشنهاد ویژه</h2>
     </div>
 
     <div class="row">
-        <!-- محصول اول -->
-        <div class="col-md-3">
+        {% for product in products|slice:":4" %}
+        <div class="col-md-3 mb-4">
             <div class="card" style="width: 18rem;">
-                <img src="{% static 'images/123.jpg' %}" class="card-img-top" alt="محصول 1">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
                 <div class="card-body">
-                    <h5 class="card-title">چای لاهیجان</h5>
-                    <p class="card-text">120/000 تومان</p>
-                    <div class="d-flex">
-                        <a href="{% url 'product_detail' product_id=1 %}" class="btn btn-primary me-2">نمایش جزئیات</a>
-                        <a href="{% url 'add_to_cart' product_id=1 %}" class="btn btn-danger">افزودن به سبد خرید</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.price }} تومان</p>
 
-        <!-- محصول دوم -->
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'images/121.jpg' %}" class="card-img-top" alt="محصول 2">
-                <div class="card-body">
-                    <h5 class="card-title">زیتون رودبار</h5>
-                    <p class="card-text">160/000 تومان</p>
                     <div class="d-flex">
-                        <a href="{% url 'product_detail' product_id=2 %}" class="btn btn-primary me-2">نمایش جزئیات</a>
-                        <a href="{% url 'add_to_cart' product_id=2 %}" class="btn btn-danger">افزودن به سبد خرید</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        
+                        <a href="{% url 'product_detail' product_id=product.id %}" class="btn btn-primary me-2">نمایش جزئیات</a>
 
-        <!-- محصول سوم -->
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'images/122.jpg' %}" class="card-img-top" alt="محصول 3">
-                <div class="card-body">
-                    <h5 class="card-title">بادام آستانه</h5>
-                    <p class="card-text">89/000 تومان</p>
-                    <div class="d-flex">
-                        <a href="{% url 'product_detail' product_id=3 %}" class="btn btn-primary me-2">نمایش جزئیات</a>
-                        <a href="{% url 'add_to_cart' product_id=3 %}" class="btn btn-danger">افزودن به سبد خرید</a>
+                        
+                        <form method="POST" action="{% url 'add_to_cart' product.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="count" value="1">
+                            <button type="submit" class="btn btn-danger">افزودن به سبد خرید</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- محصول چهارم -->
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-                <img src="{% static 'images/120.jpg' %}" class="card-img-top" alt="محصول 4">
-                <div class="card-body">
-                    <h5 class="card-title">برنج هاشمی</h5>
-                    <p class="card-text">تومان 920/000 </p>
-                    <div class="d-flex">
-                        <a href="{% url 'product_detail' product_id=4 %}" class="btn btn-primary me-2">نمایش جزئیات</a>
-                        <a href="{% url 'add_to_cart' product_id=4 %}" class="btn btn-danger">افزودن به سبد خرید</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
+  
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
 
-<!-- استایل CSS -->
+      
+
+
 <style>
     .special-offer-box {
         background: linear-gradient(45deg, #f39c12, #e74c3c);
@@ -208,15 +198,15 @@
     
    <div class="custom-box my-3"></div>
 
-<!-- استایل CSS -->
+
 <style>
     .custom-box {
-        width: 60%; /* عرض محدودتر */
-        margin: 0 auto; /* قرار گرفتن در مرکز صفحه */
-        background-color: #d6d6d6; /* رنگ خاکستری کمی تیره‌تر */
-        border: 3px solid #aaa; /* حاشیه ضخیم‌تر */
-        border-radius: 10px; /* گوشه‌های گرد */
-        height: 50px; /* ضخامت بیشتر */
+        max-width: 60%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
     }
 </style>
 
@@ -229,14 +219,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <title>Special Offers</title>
     <style>
       .special-section {
-        background-color: #f2f7fc; /* رنگ ملایم برای پس‌زمینه کل باکس */
+        background-color: #f2f7fc; 
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -249,21 +239,21 @@
         height: auto;
         border-radius: 10px;
         object-fit: cover;
-        border: 2px solid #3498db; /* رنگ آبی دور تصویر ثابت */
+        border: 2px solid #3498db; 
       }
 
       .card {
         margin-bottom: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff; /* پس‌زمینه سفید کارت‌ها */
-        border: 1px solid #dfe6e9; /* حاشیه ملایم کارت */
+        background-color: #ffffff; 
+        border: 1px solid #dfe6e9; 
       }
 
       .card img {
         width: 100%;
-        height: 250px; /* ارتفاع بیشتر برای تصاویر کارت‌ها */
-        object-fit: cover; /* برش تصاویر به صورت استاندارد */
+        height: 250px; 
+        object-fit: cover; 
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
       }
@@ -271,51 +261,51 @@
       .card-title {
         font-size: 1.2rem;
         font-weight: bold;
-        color: #2c3e50; /* رنگ تیره‌تر برای متن عنوان */
+        color: #2c3e50; 
       }
 
       .card-text {
-        color: #7f8c8d; /* رنگ ملایم برای توضیحات کارت */
+        color: #7f8c8d; 
       }
 
       .btn-primary {
-        background-color: #3498db; /* رنگ دکمه‌ها */
+        background-color: #3498db; 
         border: none;
       }
 
       .btn-primary:hover {
-        background-color: #2980b9; /* رنگ تیره‌تر دکمه‌ها روی هاور */
+        background-color: #2980b9; 
       }
 
       h4 {
-        color: #34495e; /* رنگ عنوان اصلی بخش */
-        text-align: center; /* وسط‌چین کردن عنوان */
+        color: #34495e; 
+        text-align: center; 
         margin-bottom: 15px;
       }
 
       .card-container {
         display: flex;
         justify-content: space-between;
-        gap: 15px; /* فاصله بیشتر بین کارت‌ها */
+        gap: 15px; 
       }
 
       .card-container .card {
-        width: 32%; /* عرض کارت‌ها افزایش یافته است */
+        width: 32%; 
       }
     </style>
   </head>
   <body>
     <div class="container my-4">
       <div class="row special-section">
-        <!-- تصویر ثابت سمت راست -->
+        
         <div class="col-md-4 d-flex flex-column align-items-center">
-          <h4 class="mb-3">لباس سنتی</h4> <!-- عنوان بالای تصویر -->
+          <h4 class="mb-3">لباس سنتی</h4> 
           <img src="{% static 'images/111.jpg' %}" alt="لباس سنتی" class="special-image">
         </div>
-        <!-- کارت‌های محصولات سمت چپ -->
+        
         <div class="col-md-8">
           <div class="card-container">
-            <!-- کارت ۱ -->
+            
             <div class="card">
               <img src="{% static 'images/125.jpg' %}" class="card-img-top" alt="Product 1">
               <div class="card-body text-center">
@@ -324,7 +314,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۲ -->
+            
             <div class="card">
               <img src="{% static 'images/113.jpg' %}" class="card-img-top" alt="Product 2">
               <div class="card-body text-center">
@@ -333,7 +323,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۳ -->
+            
             <div class="card">
               <img src="{% static 'images/114.jpg' %}" class="card-img-top" alt="Product 3">
               <div class="card-body text-center">
@@ -347,7 +337,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
@@ -361,15 +351,15 @@
     
     <div class="custom-box my-3"></div>
 
-<!-- استایل CSS -->
+
 <style>
     .custom-box {
-        width: 60%; /* عرض محدودتر */
-        margin: 0 auto; /* قرار گرفتن در مرکز صفحه */
-        background-color: #d6d6d6; /* رنگ خاکستری کمی تیره‌تر */
-        border: 3px solid #aaa; /* حاشیه ضخیم‌تر */
-        border-radius: 10px; /* گوشه‌های گرد */
-        height: 50px; /* ضخامت بیشتر */
+        width: 100% !important; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
     }
 </style>
     
@@ -385,14 +375,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <title>Special Offers</title>
     <style>
       .special-section {
-        background-color: #f2f7fc; /* رنگ ملایم برای پس‌زمینه کل باکس */
+        background-color: #f2f7fc; 
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -405,21 +395,21 @@
         height: auto;
         border-radius: 10px;
         object-fit: cover;
-        border: 2px solid #3498db; /* رنگ آبی دور تصویر ثابت */
+        border: 2px solid #3498db; 
       }
 
       .card {
         margin-bottom: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff; /* پس‌زمینه سفید کارت‌ها */
-        border: 1px solid #dfe6e9; /* حاشیه ملایم کارت */
+        background-color: #ffffff; 
+        border: 1px solid #dfe6e9; 
       }
 
       .card img {
         width: 100%;
-        height: 250px; /* ارتفاع بیشتر برای تصاویر کارت‌ها */
-        object-fit: cover; /* برش تصاویر به صورت استاندارد */
+        height: 250px; 
+        object-fit: cover; 
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
       }
@@ -427,51 +417,51 @@
       .card-title {
         font-size: 1.2rem;
         font-weight: bold;
-        color: #2c3e50; /* رنگ تیره‌تر برای متن عنوان */
+        color: #2c3e50; 
       }
 
       .card-text {
-        color: #7f8c8d; /* رنگ ملایم برای توضیحات کارت */
+        color: #7f8c8d; 
       }
 
       .btn-primary {
-        background-color: #3498db; /* رنگ دکمه‌ها */
+        background-color: #3498db; 
         border: none;
       }
 
       .btn-primary:hover {
-        background-color: #2980b9; /* رنگ تیره‌تر دکمه‌ها روی هاور */
+        background-color: #2980b9; 
       }
 
       h4 {
-        color: #34495e; /* رنگ عنوان اصلی بخش */
-        text-align: center; /* وسط‌چین کردن عنوان */
+        color: #34495e; 
+        text-align: center; 
         margin-bottom: 15px;
       }
 
       .card-container {
         display: flex;
         justify-content: space-between;
-        gap: 15px; /* فاصله بیشتر بین کارت‌ها */
+        gap: 15px; 
       }
 
       .card-container .card {
-        width: 32%; /* عرض کارت‌ها افزایش یافته است */
+        width: 32%; 
       }
     </style>
   </head>
   <body>
     <div class="container my-4">
       <div class="row special-section">
-        <!-- تصویر ثابت سمت راست -->
+        
         <div class="col-md-4 d-flex flex-column align-items-center">
-          <h4 class="mb-3">برنج</h4> <!-- عنوان بالای تصویر -->
+          <h4 class="mb-3">برنج</h4> 
           <img src="{% static 'images/170.jpg' %}" alt="برنج" class="special-image">
         </div>
-        <!-- کارت‌های محصولات سمت چپ -->
+        
         <div class="col-md-8">
           <div class="card-container">
-            <!-- کارت ۱ -->
+            
             <div class="card">
               <img src="{% static 'images/175.jpg' %}" class="card-img-top" alt="Product 1">
               <div class="card-body text-center">
@@ -480,7 +470,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۲ -->
+            
             <div class="card">
               <img src="{% static 'images/120.jpg' %}" class="card-img-top" alt="Product 2">
               <div class="card-body text-center">
@@ -489,7 +479,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۳ -->
+            
             <div class="card">
               <img src="{% static 'images/174.jpg' %}" class="card-img-top" alt="Product 3">
               <div class="card-body text-center">
@@ -515,15 +505,15 @@
     
      <div class="custom-box my-3"></div>
 
-<!-- استایل CSS -->
+
 <style>
     .custom-box {
-        width: 60%; /* عرض محدودتر */
-        margin: 0 auto; /* قرار گرفتن در مرکز صفحه */
-        background-color: #d6d6d6; /* رنگ خاکستری کمی تیره‌تر */
-        border: 3px solid #aaa; /* حاشیه ضخیم‌تر */
-        border-radius: 10px; /* گوشه‌های گرد */
-        height: 50px; /* ضخامت بیشتر */
+        width: 70%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
     }
 </style>
     
@@ -539,14 +529,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <title>Special Offers</title>
     <style>
       .special-section {
-        background-color: #f2f7fc; /* رنگ ملایم برای پس‌زمینه کل باکس */
+        background-color: #f2f7fc; 
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -559,21 +549,21 @@
         height: auto;
         border-radius: 10px;
         object-fit: cover;
-        border: 2px solid #3498db; /* رنگ آبی دور تصویر ثابت */
+        border: 2px solid #3498db; 
       }
 
       .card {
         margin-bottom: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff; /* پس‌زمینه سفید کارت‌ها */
-        border: 1px solid #dfe6e9; /* حاشیه ملایم کارت */
+        background-color: #ffffff; 
+        border: 1px solid #dfe6e9; 
       }
 
       .card img {
         width: 100%;
-        height: 250px; /* ارتفاع بیشتر برای تصاویر کارت‌ها */
-        object-fit: cover; /* برش تصاویر به صورت استاندارد */
+        height: 250px; 
+        object-fit: cover; 
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
       }
@@ -581,51 +571,51 @@
       .card-title {
         font-size: 1.2rem;
         font-weight: bold;
-        color: #2c3e50; /* رنگ تیره‌تر برای متن عنوان */
+        color: #2c3e50; 
       }
 
       .card-text {
-        color: #7f8c8d; /* رنگ ملایم برای توضیحات کارت */
+        color: #7f8c8d; 
       }
 
       .btn-primary {
-        background-color: #3498db; /* رنگ دکمه‌ها */
+        background-color: #3498db; 
         border: none;
       }
 
       .btn-primary:hover {
-        background-color: #2980b9; /* رنگ تیره‌تر دکمه‌ها روی هاور */
+        background-color: #2980b9; 
       }
 
       h4 {
-        color: #34495e; /* رنگ عنوان اصلی بخش */
-        text-align: center; /* وسط‌چین کردن عنوان */
+        color: #34495e; 
+        text-align: center; 
         margin-bottom: 15px;
       }
 
       .card-container {
         display: flex;
         justify-content: space-between;
-        gap: 15px; /* فاصله بیشتر بین کارت‌ها */
+        gap: 15px; 
       }
 
       .card-container .card {
-        width: 32%; /* عرض کارت‌ها افزایش یافته است */
+        width: 32%; 
       }
     </style>
   </head>
   <body>
     <div class="container my-4">
       <div class="row special-section">
-        <!-- تصویر ثابت سمت راست -->
+        
         <div class="col-md-4 d-flex flex-column align-items-center">
-          <h4 class="mb-3">بادام</h4> <!-- عنوان بالای تصویر -->
+          <h4 class="mb-3">بادام</h4> 
           <img src="{% static 'images/181.jpg' %}" alt="بادام" class="special-image">
         </div>
-        <!-- کارت‌های محصولات سمت چپ -->
+        
         <div class="col-md-8">
           <div class="card-container">
-            <!-- کارت ۱ -->
+            
             <div class="card">
               <img src="{% static 'images/182.jpg' %}" class="card-img-top" alt="Product 1">
               <div class="card-body text-center">
@@ -634,7 +624,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۲ -->
+            
             <div class="card">
               <img src="{% static 'images/122.jpg' %}" class="card-img-top" alt="Product 2">
               <div class="card-body text-center">
@@ -643,7 +633,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۳ -->
+            
             <div class="card">
               <img src="{% static 'images/183.jpg' %}" class="card-img-top" alt="Product 3">
               <div class="card-body text-center">
@@ -657,7 +647,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
@@ -668,15 +658,15 @@
     
      <div class="custom-box my-3"></div>
 
-<!-- استایل CSS -->
+
 <style>
     .custom-box {
-        width: 60%; /* عرض محدودتر */
-        margin: 0 auto; /* قرار گرفتن در مرکز صفحه */
-        background-color: #d6d6d6; /* رنگ خاکستری کمی تیره‌تر */
-        border: 3px solid #aaa; /* حاشیه ضخیم‌تر */
-        border-radius: 10px; /* گوشه‌های گرد */
-        height: 50px; /* ضخامت بیشتر */
+        width: 60%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
     }
 </style>
     
@@ -690,14 +680,14 @@
     
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <title>Special Offers</title>
     <style>
       .special-section {
-        background-color: #f2f7fc; /* رنگ ملایم برای پس‌زمینه کل باکس */
+        background-color: #f2f7fc; 
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -710,21 +700,21 @@
         height: auto;
         border-radius: 10px;
         object-fit: cover;
-        border: 2px solid #3498db; /* رنگ آبی دور تصویر ثابت */
+        border: 2px solid #3498db; 
       }
 
       .card {
         margin-bottom: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff; /* پس‌زمینه سفید کارت‌ها */
-        border: 1px solid #dfe6e9; /* حاشیه ملایم کارت */
+        background-color: #ffffff; 
+        border: 1px solid #dfe6e9; 
       }
 
       .card img {
         width: 100%;
-        height: 250px; /* ارتفاع بیشتر برای تصاویر کارت‌ها */
-        object-fit: cover; /* برش تصاویر به صورت استاندارد */
+        height: 250px; 
+        object-fit: cover; 
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
       }
@@ -732,51 +722,51 @@
       .card-title {
         font-size: 1.2rem;
         font-weight: bold;
-        color: #2c3e50; /* رنگ تیره‌تر برای متن عنوان */
+        color: #2c3e50; 
       }
 
       .card-text {
-        color: #7f8c8d; /* رنگ ملایم برای توضیحات کارت */
+        color: #7f8c8d; 
       }
 
       .btn-primary {
-        background-color: #3498db; /* رنگ دکمه‌ها */
+        background-color: #3498db; 
         border: none;
       }
 
       .btn-primary:hover {
-        background-color: #2980b9; /* رنگ تیره‌تر دکمه‌ها روی هاور */
+        background-color: #2980b9; 
       }
 
       h4 {
-        color: #34495e; /* رنگ عنوان اصلی بخش */
-        text-align: center; /* وسط‌چین کردن عنوان */
+        color: #34495e; 
+        text-align: center; 
         margin-bottom: 15px;
       }
 
       .card-container {
         display: flex;
         justify-content: space-between;
-        gap: 15px; /* فاصله بیشتر بین کارت‌ها */
+        gap: 15px; 
       }
 
       .card-container .card {
-        width: 32%; /* عرض کارت‌ها افزایش یافته است */
+        width: 32%; 
       }
     </style>
   </head>
   <body>
     <div class="container my-4">
       <div class="row special-section">
-        <!-- تصویر ثابت سمت راست -->
+        
         <div class="col-md-4 d-flex flex-column align-items-center">
-          <h4 class="mb-3">چای</h4> <!-- عنوان بالای تصویر -->
+          <h4 class="mb-3">چای</h4> 
           <img src="{% static 'images/190.jpg' %}" alt="چای" class="special-image">
         </div>
-        <!-- کارت‌های محصولات سمت چپ -->
+        
         <div class="col-md-8">
           <div class="card-container">
-            <!-- کارت ۱ -->
+            
             <div class="card">
               <img src="{% static 'images/191.png' %}" class="card-img-top" alt="Product 1">
               <div class="card-body text-center">
@@ -785,7 +775,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۲ -->
+            
             <div class="card">
               <img src="{% static 'images/123.jpg' %}" class="card-img-top" alt="Product 2">
               <div class="card-body text-center">
@@ -794,7 +784,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۳ -->
+            
             <div class="card">
               <img src="{% static 'images/192.jpg' %}" class="card-img-top" alt="Product 3">
               <div class="card-body text-center">
@@ -808,7 +798,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
@@ -820,15 +810,15 @@
     
      <div class="custom-box my-3"></div>
 
-<!-- استایل CSS -->
+
 <style>
     .custom-box {
-        width: 60%; /* عرض محدودتر */
-        margin: 0 auto; /* قرار گرفتن در مرکز صفحه */
-        background-color: #d6d6d6; /* رنگ خاکستری کمی تیره‌تر */
-        border: 3px solid #aaa; /* حاشیه ضخیم‌تر */
-        border-radius: 10px; /* گوشه‌های گرد */
-        height: 50px; /* ضخامت بیشتر */
+        width: 60%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
     }
 </style>
     
@@ -844,14 +834,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <title>Special Offers</title>
     <style>
       .special-section {
-        background-color: #f2f7fc; /* رنگ ملایم برای پس‌زمینه کل باکس */
+        background-color: #f2f7fc; 
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -864,21 +854,21 @@
         height: auto;
         border-radius: 10px;
         object-fit: cover;
-        border: 2px solid #3498db; /* رنگ آبی دور تصویر ثابت */
+        border: 2px solid #3498db; 
       }
 
       .card {
         margin-bottom: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff; /* پس‌زمینه سفید کارت‌ها */
-        border: 1px solid #dfe6e9; /* حاشیه ملایم کارت */
+        background-color: #ffffff; 
+        border: 1px solid #dfe6e9; 
       }
 
       .card img {
         width: 100%;
-        height: 250px; /* ارتفاع بیشتر برای تصاویر کارت‌ها */
-        object-fit: cover; /* برش تصاویر به صورت استاندارد */
+        height: 250px; 
+        object-fit: cover; 
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
       }
@@ -886,51 +876,51 @@
       .card-title {
         font-size: 1.2rem;
         font-weight: bold;
-        color: #2c3e50; /* رنگ تیره‌تر برای متن عنوان */
+        color: #2c3e50; 
       }
 
       .card-text {
-        color: #7f8c8d; /* رنگ ملایم برای توضیحات کارت */
+        color: #7f8c8d; 
       }
 
       .btn-primary {
-        background-color: #3498db; /* رنگ دکمه‌ها */
+        background-color: #3498db; 
         border: none;
       }
 
       .btn-primary:hover {
-        background-color: #2980b9; /* رنگ تیره‌تر دکمه‌ها روی هاور */
+        background-color: #2980b9; 
       }
 
       h4 {
-        color: #34495e; /* رنگ عنوان اصلی بخش */
-        text-align: center; /* وسط‌چین کردن عنوان */
+        color: #34495e; 
+        text-align: center; 
         margin-bottom: 15px;
       }
 
       .card-container {
         display: flex;
         justify-content: space-between;
-        gap: 15px; /* فاصله بیشتر بین کارت‌ها */
+        gap: 15px; 
       }
 
       .card-container .card {
-        width: 32%; /* عرض کارت‌ها افزایش یافته است */
+        width: 32%; 
       }
     </style>
   </head>
   <body>
     <div class="container my-4">
       <div class="row special-section">
-        <!-- تصویر ثابت سمت راست -->
+        
         <div class="col-md-4 d-flex flex-column align-items-center">
-          <h4 class="mb-3">زیتون</h4> <!-- عنوان بالای تصویر -->
+          <h4 class="mb-3">زیتون</h4> 
           <img src="{% static 'images/161.jpg' %}" alt="زیتون" class="special-image">
         </div>
-        <!-- کارت‌های محصولات سمت چپ -->
+        
         <div class="col-md-8">
           <div class="card-container">
-            <!-- کارت ۱ -->
+            
             <div class="card">
               <img src="{% static 'images/150.jpg' %}" class="card-img-top" alt="Product 1">
               <div class="card-body text-center">
@@ -939,7 +929,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۲ -->
+            
             <div class="card">
               <img src="{% static 'images/152.png' %}" class="card-img-top" alt="Product 2">
               <div class="card-body text-center">
@@ -948,7 +938,7 @@
                 <button class="btn btn-primary">خرید</button>
               </div>
             </div>
-            <!-- کارت ۳ -->
+            
             <div class="card">
               <img src="{% static 'images/154.jpg' %}" class="card-img-top" alt="Product 3">
               <div class="card-body text-center">
@@ -962,7 +952,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
@@ -975,15 +965,15 @@
 
  <div class="custom-box my-3"></div>
 
-<!-- استایل CSS -->
+
 <style>
     .custom-box {
-        width: 60%; /* عرض محدودتر */
-        margin: 0 auto; /* قرار گرفتن در مرکز صفحه */
-        background-color: #d6d6d6; /* رنگ خاکستری کمی تیره‌تر */
-        border: 3px solid #aaa; /* حاشیه ضخیم‌تر */
-        border-radius: 10px; /* گوشه‌های گرد */
-        height: 50px; /* ضخامت بیشتر */
+        width: 60%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
     }
 </style>
 
@@ -999,3 +989,50 @@
 
 
 {% include 'base/footer.html' %}
+
+<div class="custom-box my-3"></div>
+
+
+<style>
+    .custom-box {
+        width: 60%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
+    }
+</style>
+
+
+
+<div class="custom-box my-3"></div>
+
+
+<style>
+    .custom-box {
+        width: 60%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
+    }
+</style>
+
+
+
+
+<div class="custom-box my-3"></div>
+
+
+<style>
+    .custom-box {
+        width: 60%; 
+        margin: 0 auto; 
+        background-color: #d6d6d6; 
+        border: 3px solid #aaa; 
+        border-radius: 10px; 
+        height: 50px; 
+    }
+</style>
